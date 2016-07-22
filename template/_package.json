@@ -1,0 +1,90 @@
+{
+  "name": "{{dir.name}}",
+  "version": "0.1.0",
+  "description": "{{scope.desc}}",
+  "homepage": "{{http scope.homepage}}",
+  "author": {
+    "name": "{{scope.author}}",
+    "email": "{{scope.authorEmail}}",
+    "url": "{{http scope.authorHomepage}}"
+  },
+  "contributors": [
+    {
+      "name": "{{scope.contributor}}",
+      "email": "{{scope.contributorEmail}}",
+      "url": "{{http scope.contributorHomepage}}"
+    }
+  ],
+  "keywords": [],
+  "bugs": {
+    "url": "{{http scope.bugsHomepage}}",
+    "email": "{{scope.bugsEmail}}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "{{scope.git}}"
+  },
+  "engines": {
+    "node": ">= 5.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "express": "*",
+    {{#if (gt (length scope.bodyParser) 0)}}
+    "body-parser": "*",
+    {{/if}}
+    {{#if scope.cookieParser}}
+    "cookie-parser": "*",
+    {{/if}}
+    {{#if (eq scope.session "cookie-session")}}
+    "cookie-session": "*",
+    {{/if}}
+    {{#if (eq scope.session "express-session")}}
+    "express-session": "*",
+    {{/if}}
+    {{#if scope.helmet}}
+    "helmet": "*",
+    {{/if}}
+    {{#if scope.morgan}}
+    "morgan": "*",
+    {{/if}}
+    {{#if scope.favicon}}
+    "serve-favicon": "*",
+    {{/if}}
+    {{#if scope.serveStatic}}
+    "serve-static": "*",
+    {{/if}}
+    "hbs": "*"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "*",
+    {{#if scope.nodemon}}
+    "nodemon": "*",
+    {{/if}}
+    "justo": "*",
+    "justo-assert": "*",
+    "justo-assert-fs": "*",
+    "justo-plugin-babel": "*",
+    "justo-plugin-fs": "*",
+    "justo-plugin-jshint": "*",
+    "justo-plugin-npm": "*"
+  },
+  "bin": {
+    "{{scope.binName}}": "./bin/www.js"
+  },
+  "files": [
+    "bin/",
+    "config/",
+    "lib/",
+    "public/",
+    "routes/",
+    "views/"
+  ],
+  "scripts": {
+    "start": "node ./bin/www.js",
+    {{#if scope.nodemon}}
+    "start-dev": "./node_modules/.bin/nodemon --delay 2s --ext hbs,js,json ./bin/www.js",
+    {{/if}}
+    "test": "justo test"
+  }
+}

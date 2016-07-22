@@ -1,0 +1,10 @@
+router.{{scope.method}}("/{{scope.path}}", function(req, res) {
+  {{#if (eq scope.method 'get')}}
+  res.render("{{scope.component}}/{{scope.view}}", {});
+  {{else}}
+  const app = req.app;
+  const params = req.body;
+
+  //{{uppercase scope.method}} code
+  {{/if}}
+});

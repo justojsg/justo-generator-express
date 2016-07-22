@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>{{esc "{{title}}"}}</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+{{#if (eq scope.faviconFile "/images/favicon.png")}}
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+{{/if}}
+{{#if (eq scope.faviconFile "/images/favicon.ico")}}
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+{{/if}}
+  </head>
+
+  <body>
+    {{esc "{{{body}}}"}}
+  </body>
+</html>

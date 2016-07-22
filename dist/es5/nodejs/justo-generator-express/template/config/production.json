@@ -1,0 +1,5 @@
+{
+  "appName": "{{scope.appName}}",
+  "host": "localhost",
+  "port": 80
+}
