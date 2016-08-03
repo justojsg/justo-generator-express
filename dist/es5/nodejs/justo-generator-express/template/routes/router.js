@@ -6,5 +6,5 @@ export const router = express.Router();
 
 //routes
 router.get("/", function(req, res) {
-  res.render("{{scope.component}}/{{scope.view}}", {});
+  res.render("{{scope.name}}/{{scope.view}}", {});
 });
