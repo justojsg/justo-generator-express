@@ -1,12 +1,17 @@
+
 router.{{scope.method}}("/{{scope.path}}", function(req, res) {
   const app = req.app;
-  {{#if (eq scope.method 'get')}}
-  const params = req.params;
-
-  res.render("{{scope.router}}/{{scope.view}}", {});
-  {{else}}
+  {{#if (eq scope.method "post")}}
   const params = req.body;
+  {{else}}
+  const params = req.params;
+  {{/if}}
 
-  //{{uppercase scope.method}} code
+  {{#if scope.view}}
+  res.render("{{scope.view}}", {});
+  {{else}}
+  //res.send(...);
+  //res.json(...);
+  //res.sendFile(...);
   {{/if}}
 });

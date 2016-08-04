@@ -31,8 +31,8 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    test("generate(answers)", function() {
-      gen.generate({});
-    });
+    // test("generate(answers)", function() {
+    //   gen.generate({});
+    // });
   });
 })();

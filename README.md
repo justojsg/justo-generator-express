@@ -3,7 +3,7 @@
 [![Dependency Status](https://david-dm.org/justojsg/justo-generator-express.svg)](https://david-dm.org/justojsg/justo-generator-express)
 [![devDependency Status](https://david-dm.org/justojsg/justo-generator-express/dev-status.svg)](https://david-dm.org/justojsg/justo-generator-express#info=devDependencies)
 
-Generator for Express applications.
+Generator for *Express* applications.
 
 *Proudly made with ♥ in Valencia, Spain, EU.*
 
@@ -13,6 +13,8 @@ Features:
   `bodyParser`, `express-session`...
 - Allow to add new router files to the `routes` directory.
 - Allow to add new routes to a router files.
+- Allow to add new *Handlebars* views.
+- Allow to add new *Handlebars* partials.
 - Allow to configure the *Express* app for serving a *React* app.
 
 ## Install
@@ -45,7 +47,7 @@ justo -g express route
 
 ## Adding Handlebars views/templates
 
-To add a `Handlebars` view/template to the `views` directory:
+To add a *Handlebars* view/template to the `views` directory:
 
 ```
 justo -g express hbs view
@@ -53,7 +55,7 @@ justo -g express hbs view
 
 ## Adding Handlebars partials
 
-To add a `Handlebars` partial to the `views/partials` directory:
+To add a *Handlebars* partial to the `views/partials` directory:
 
 ```
 justo -g express hbs partial
