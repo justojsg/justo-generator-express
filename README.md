@@ -13,6 +13,7 @@ Features:
   `bodyParser`, `express-session`...
 - Allow to add new router files to the `routes` directory.
 - Allow to add new routes to a router files.
+- Allow to configure the *Express* app for serving a *React* app.
 
 ## Install
 
@@ -42,9 +43,9 @@ To add a route to a router file:
 justo -g express route
 ```
 
-## Adding Handlebars views
+## Adding Handlebars views/templates
 
-To add a `Handlebars` view to the `views` directory:
+To add a `Handlebars` view/template to the `views` directory:
 
 ```
 justo -g express hbs view
@@ -57,3 +58,19 @@ To add a `Handlebars` partial to the `views/partials` directory:
 ```
 justo -g express hbs partial
 ```
+
+## Working with React apps
+
+If your *Express* app serves a *React* app, when the generator inquires
+*React app?*, you can answer *Y* and then:
+
+- The *Express* app must be developed as one project and the *React* app as other one.
+- The *Express* app will be configured for serving a *React* app.
+- The *Express* app should contain the static resources: images, stylesheets, etc.
+- The *Express* app should contain the REST API if needed.
+- The `views/index.hbs` template will contain a `<div id="react-app">` element
+  for your *React* app.
+- During the tests, you copy the bundle file to `public/scripts/react-app.js`.
+  If you have only updated the *React* app and you are using *nodemon*,
+  you can write the bundle file to
+  `dist/es5/nodejs/your_app_name/public/scripts/react-app.js`.

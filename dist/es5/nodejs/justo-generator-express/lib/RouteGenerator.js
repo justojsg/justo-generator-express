@@ -32,7 +32,7 @@ var _justoGenerator = require("justo-generator");function _classCallCheck(instan
 
 
     answers) {
-      this.list({ name: "router", choices: this.getFileNames("routes", { ignore: "map.js", ext: false }) });
+      this.list({ name: "router", choices: this.getFileNames("routes", { ignore: ["map.js", "react.js"], ext: false }) });
       this.input("path");
       if (this.list("method") == "get") this.input("view");} }, { key: "generate", value: function generate(
 
