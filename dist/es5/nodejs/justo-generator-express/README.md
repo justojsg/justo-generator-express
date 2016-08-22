@@ -68,11 +68,4 @@ If your *Express* app serves a *React* app, when the generator inquires
 
 - The *Express* app must be developed as one project and the *React* app as other one.
 - The *Express* app will be configured for serving a *React* app.
-- The *Express* app should contain the static resources: images, stylesheets, etc.
-- The *Express* app should contain the REST API if needed.
-- The `views/index.hbs` template will contain a `<div id="react-app">` element
-  for your *React* app.
-- During the tests, you copy the bundle file to `public/scripts/react-app.js`.
-  If you have only updated the *React* app and you are using *nodemon*,
-  you can write the bundle file to
-  `dist/es5/nodejs/your_app_name/public/scripts/react-app.js`.
+- Generally, the *React* app adds its code to the `public` folder.

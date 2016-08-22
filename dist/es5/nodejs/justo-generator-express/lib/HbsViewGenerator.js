@@ -34,16 +34,17 @@ var _justoGenerator = require("justo-generator");function _interopRequireDefault
       this.list({ name: "folder", choices: ["<none>", "<other>"].concat(this.getDirNames("views", { ignore: "partials" })) });
       if (answers.folder == "<other>") {
         answers.folder = undefined;
-        this.input("folder");}
-
+        this.input("folder");
+      }
       if (answers.folder == "<none>") answers.folder = "/";
       this.input("view");
-      this.confirm("form");} }, { key: "generate", value: function generate(
-
+      this.confirm("form");
+    } }, { key: "generate", value: function generate(
 
 
 
 
     answers) {
       if (answers.folder != "/" && !this.exists("views", answers.folder)) this.mkdir("views", answers.folder);
-      this.template("views/view.hbs", _path2.default.join(answers.folder, answers.view + ".hbs"), answers);} }, { key: "desc", get: function get() {return "Generate a Handlebars view.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", view: "View name", form: { title: "Is a form?", type: "boolean" } };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
+      this.template("views/view.hbs", _path2.default.join(answers.folder, answers.view + ".hbs"), answers);
+    } }, { key: "desc", get: function get() {return "Generate a Handlebars view.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", view: "View name", form: { title: "Is a form?", type: "boolean" } };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;

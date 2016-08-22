@@ -31,12 +31,12 @@ var _justoGenerator = require("justo-generator");function _interopRequireDefault
       this.list({ name: "folder", choices: ["<none>", "<other>"].concat(this.getDirNames("routes")) });
       if (answers.folder == "<other>") {
         answers.folder = undefined;
-        this.input("folder");}
-
+        this.input("folder");
+      }
       if (answers.folder == "<none>") answers.folder = "/";
       this.input("name");
-      this.input("indexView");} }, { key: "generate", value: function generate(
-
+      this.input("indexView");
+    } }, { key: "generate", value: function generate(
 
 
 
@@ -46,6 +46,8 @@ var _justoGenerator = require("justo-generator");function _interopRequireDefault
       this.template("routes/router.js", _path2.default.join(answers.folder, answers.name + ".js"), answers);
 
       if (answers.folder == "/") {
-        this.append("routes/map.js", "  app.use(\"/" + answers.name + "\", require(\"./" + answers.name + "\").router);\n", { line: -2 });} else 
-      {
-        this.append("routes/map.js", "  app.use(\"/" + answers.folder + "/" + answers.name + "\", require(\"./" + answers.folder + "/" + answers.name + "\").router);\n", { line: -2 });}} }, { key: "desc", get: function get() {return "Add a router file.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", indexView: "View to render when root (/) requested", name: "Router name" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
+        this.append("routes/map.js", "  app.use(\"/" + answers.name + "\", require(\"./" + answers.name + "\").router);\n", { line: -2 });
+      } else {
+        this.append("routes/map.js", "  app.use(\"/" + answers.folder + "/" + answers.name + "\", require(\"./" + answers.folder + "/" + answers.name + "\").router);\n", { line: -2 });
+      }
+    } }, { key: "desc", get: function get() {return "Add a router file.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", indexView: "View to render when root (/) requested", name: "Router name" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;

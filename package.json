@@ -1,6 +1,6 @@
 {
   "name": "justo-generator-express",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generator for Express applications.",
   "homepage": "http://justojs.org",
   "author": {
@@ -16,6 +16,8 @@
     }
   ],
   "keywords": [
+    "Express",
+    "Express generator",
     "Justo",
     "Justo.js",
     "justo-generator"
@@ -42,8 +44,8 @@
     "justo-assert": "*",
     "justo-assert-fs": "*",
     "justo-plugin-babel": "*",
+    "justo-plugin-eslint": "*",
     "justo-plugin-fs": "*",
-    "justo-plugin-jshint": "*",
     "justo-plugin-npm": "*"
   },
   "preferGlobal": true,

@@ -38,14 +38,16 @@ var _justoGenerator = require("justo-generator");function _interopRequireDefault
       this.list({ name: "router", choices: this.getFileNames(_path2.default.join("routes", answers.folder), { ext: false, ignore: "map.js" }) });
       this.input("path");
       this.input("view");
-      this.list("method");} }, { key: "generate", value: function generate(
-
+      this.list("method");
+    } }, { key: "generate", value: function generate(
 
 
 
 
     answers) {
       this.append(
-      _path2.default.join("routes", answers.folder, answers.router + ".js"), 
-      this.templateAsString("routes/route.hbs", answers), 
-      { type: "end" });} }, { key: "desc", get: function get() {return "Add a route.";} }, { key: "params", get: function get() {return { folder: "Router folder", router: "Router name", path: "Route path", method: { title: "Method", choices: ["all", "delete", "get", "head", "options", "patch", "post", "put"], default: "get" }, view: "View to render when path requested" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
+      _path2.default.join("routes", answers.folder, answers.router + ".js"),
+      this.templateAsString("routes/route.hbs", answers),
+      { type: "end" });
+
+    } }, { key: "desc", get: function get() {return "Add a route.";} }, { key: "params", get: function get() {return { folder: "Router folder", router: "Router name", path: "Route path", method: { title: "Method", choices: ["all", "delete", "get", "head", "options", "patch", "post", "put"], default: "get" }, view: "View to render when path requested" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;

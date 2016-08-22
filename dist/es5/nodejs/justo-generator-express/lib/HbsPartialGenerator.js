@@ -30,15 +30,16 @@ var _justoGenerator = require("justo-generator");function _interopRequireDefault
       this.list({ name: "folder", choices: ["<none>", "<other>"].concat(this.getDirNames("views/partials")) });
       if (answers.folder == "<other>") {
         answers.folder = undefined;
-        this.input("folder");}
-
+        this.input("folder");
+      }
       if (answers.folder == "<none>") answers.folder = "/";
-      this.input("name");} }, { key: "generate", value: function generate(
-
+      this.input("name");
+    } }, { key: "generate", value: function generate(
 
 
 
 
     answers) {
       if (answers.folder != "/" && !this.exists("views/partials", answers.folder)) this.mkdir("views/partials", answers.folder);
-      this.copy("views/partials/partial.hbs", _path2.default.join(answers.folder, answers.name + ".hbs"));} }, { key: "desc", get: function get() {return "Generate a Handlebars partial.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", name: "Partial name" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
+      this.copy("views/partials/partial.hbs", _path2.default.join(answers.folder, answers.name + ".hbs"));
+    } }, { key: "desc", get: function get() {return "Generate a Handlebars partial.";} }, { key: "params", get: function get() {return { folder: "Add to subfolder", name: "Partial name" };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
