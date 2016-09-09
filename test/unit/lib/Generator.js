@@ -199,5 +199,97 @@ suite.only("Generator", function() {
         file(DST, ".jshintrc").must.exist();
       });
     });
+
+    suite("Session state", function() {
+      test("<none>", function() {
+        gen.generate({
+          appName: "test",
+          binName: "test",
+          bodyParser: ["json", "text", "raw", "urlencoded"],
+          cookieParser: true,
+          cookieParserSecret: "1234",
+          favicon: true,
+          faviconFile: "/images/favicon.png",
+          faviconMaxAge: 1234,
+          gitignore: true,
+          helmet: true,
+          linter: "JSHint",
+          morgan: true,
+          morganFormat: "shared",
+          nodemon: true,
+          notFound: "Send 404",
+          serveStatic: true,
+          serveStaticMaxAge: 1234,
+          session: "<none>"
+        });
+
+        common();
+        file(DST, "package.json").must.not.contain(["cookie-session", "express-session"]);
+        file(DST, "app/middleware.js").must.not.contain(["cookie-session", "express-session"]);
+      });
+
+      test("cookie-session", function() {
+        gen.generate({
+          appName: "test",
+          binName: "test",
+          bodyParser: ["json", "text", "raw", "urlencoded"],
+          cookieParser: true,
+          cookieParserSecret: "1234",
+          favicon: true,
+          faviconFile: "/images/favicon.png",
+          faviconMaxAge: 1234,
+          gitignore: true,
+          helmet: true,
+          linter: "JSHint",
+          morgan: true,
+          morganFormat: "shared",
+          nodemon: true,
+          notFound: "Send 404",
+          serveStatic: true,
+          serveStaticMaxAge: 1234,
+          session: "cookie-session",
+          sessionMaxAge: 1234,
+          sessionSecret: "1234"
+        });
+
+        common();
+        file(DST, "package.json").must.contain("cookie-session");
+        file(DST, "package.json").must.not.contain("express-session");
+        file(DST, "app/middleware.js").must.contain("cookie-session");
+        file(DST, "app/middleware.js").must.not.contain("express-session");
+      });
+
+      test("express-session", function() {
+        gen.generate({
+          appName: "test",
+          binName: "test",
+          bodyParser: ["json", "text", "raw", "urlencoded"],
+          cookieParser: true,
+          cookieParserSecret: "1234",
+          favicon: true,
+          faviconFile: "/images/favicon.png",
+          faviconMaxAge: 1234,
+          gitignore: true,
+          helmet: true,
+          linter: "JSHint",
+          morgan: true,
+          morganFormat: "shared",
+          nodemon: true,
+          notFound: "Send 404",
+          serveStatic: true,
+          serveStaticMaxAge: 1234,
+          session: "express-session",
+          sessionMaxAge: 1234,
+          sessionSecret: "1234",
+          sessionGenid: true
+        });
+
+        common();
+        file(DST, "package.json").must.contain("express-session");
+        file(DST, "package.json").must.not.contain("cookie-session");
+        file(DST, "app/middleware.js").must.contain("express-session");
+        file(DST, "app/middleware.js").must.not.contain("cookie-session");
+      });
+    });
   });
 })();
