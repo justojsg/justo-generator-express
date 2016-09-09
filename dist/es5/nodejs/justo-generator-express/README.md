@@ -11,11 +11,12 @@ Features:
 
 - Allow to configure several *middlewares*: `Helmet`, `Morgan`, `serve-static`, `serve-favicon`,
   `bodyParser`, `express-session`...
-- Allow to add new router files to the `routes` directory.
+- Allow to add new router files to the `app/routes` directory.
 - Allow to add new routes to a router files.
 - Allow to add new *Handlebars* views.
 - Allow to add new *Handlebars* partials.
-- Allow to configure the *Express* app for serving a *React* app.
+
+**Note**. You can learn *Express* and this generator, in Spanish, on [nodemy.com](http://nodemy.com).
 
 ## Install
 
@@ -31,7 +32,7 @@ justo -g express
 
 ## Adding routers
 
-To add a router file to the `routes` directory:
+To add a router file to the `app/routes` directory:
 
 ```
 justo -g express router
@@ -47,7 +48,7 @@ justo -g express route
 
 ## Adding Handlebars views/templates
 
-To add a *Handlebars* view/template to the `views` directory:
+To add a *Handlebars* view/template to the `app/views` directory:
 
 ```
 justo -g express hbs view
@@ -55,17 +56,8 @@ justo -g express hbs view
 
 ## Adding Handlebars partials
 
-To add a *Handlebars* partial to the `views/partials` directory:
+To add a *Handlebars* partial to the `app/views/partials` directory:
 
 ```
 justo -g express hbs partial
 ```
-
-## Working with React apps
-
-If your *Express* app serves a *React* app, when the generator inquires
-*React app?*, you can answer *Y* and then:
-
-- The *Express* app must be developed as one project and the *React* app as other one.
-- The *Express* app will be configured for serving a *React* app.
-- Generally, the *React* app adds its code to the `public` folder.

@@ -10,8 +10,6 @@ const lint = require("justo-plugin-jshint");
 {{else if (eq scope.linter "ESLint")}}
 const lint = require("justo-plugin-eslint");
 {{/if}}
-const publish = require("justo-plugin-npm").publish;
-const install = require("justo-plugin-npm").install;
 
 //catalog
 catalog.workflow({name: "build", desc: "Build the package"}, function() {
@@ -22,11 +20,14 @@ catalog.workflow({name: "build", desc: "Build the package"}, function() {
   lint("Best practices and grammar", {
     output: true,
     src: [
-      "app.js",
       "Justo.js",
       "bin/",
-      "lib/",
-      "routes/"
+      "app/lib/",
+      "app/routes/",
+      "app/errors/handle.js",
+      "app/index.js",
+      "app/middleware.js",
+      "app/redirect.js"
     ]
   });
 
@@ -35,33 +36,58 @@ catalog.workflow({name: "build", desc: "Build the package"}, function() {
     retainLines: true,
     preset: "es2015",
     files: [
-      {src: "app.js", dst: "build/es5/"},
-      {src: "lib/", dst: "build/lib/"},
-      {src: "routes/", dst: "build/es5/routes"},
+      {src: ["app/index.js", "app/middleware.js", "app/redirect.js", "app/tmplEngine.js"], dst: "build/es5/app/"},
+      {src: "app/errors/handle.js", dst: "build/es5/app/errors/"},
+      {src: "app/lib/", dst: "build/es5/app/lib/"},
+      {src: "app/routes/", dst: "build/es5/app/routes"},
     ]
   });
 
+  {{#if scope.nodemon}}
   // clean("Remove dist directory", {
   //   dirs: ["dist/es5"]
   // });
+  {{else}}
+  clean("Remove dist directory", {
+    dirs: ["dist/es5"]
+  });
+  {{/if}}
 
   copy(
     "Create package",
     {
-      src: ["package.json", "README.md", "bin/", "config/", "public/", "views/"],
+      src: [
+        "package.json",
+        "README.md",
+        "bin/",
+      ],
       dst: "dist/es5/nodejs/{{dir.name}}/"
     },
     {
-      src: "build/es5/app.js",
+      src: "build/es5/app/",
       dst: "dist/es5/nodejs/{{dir.name}}/"
     },
-    // {
-    //   src: "build/es5/lib/",
-    //   dst: "dist/es5/nodejs/{{dir.name}}/lib"
-    // },
     {
-      src: "build/es5/routes/",
-      dst: "dist/es5/nodejs/{{dir.name}}/routes"
+      src: "app/conf/",
+      dst: "dist/es5/nodejs/{{dir.name}}/app/"
+    },
+    {
+      src: ["app/errors/404.html", "app/errors/500.html"],
+      dst: "dist/es5/nodejs/{{dir.name}}/app/errors/"
+    },
+    {
+      src: "app/public/",
+      dst: "dist/es5/nodejs/{{dir.name}}/app/"
+    },
+    {
+      src: "build/es5/lib/",
+      dst: "dist/es5/nodejs/{{dir.name}}/lib",
+      force: true
+    },
+    {
+      src: "app/views",
+      dst: "dist/es5/nodejs/{{dir.name}}/app/",
+      force: true
     }
   );
 

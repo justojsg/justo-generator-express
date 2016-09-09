@@ -1,5 +1,4 @@
 //imports
-const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
 const dir = require("justo-assert-fs").dir;
@@ -31,8 +30,49 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    // test("generate(answers)", function() {
-    //   gen.generate({});
-    // });
+    test("generate(answers) - into app/views", function() {
+      gen.generate({
+        folder: "/",
+        view: "Test",
+        form: false
+      });
+
+      file(DST, "app/views/Test.hbs").must.exist();
+    });
+
+    test("generate(answers) - into app/views/folder", function() {
+      gen.generate({
+        folder: "/mytest",
+        view: "Test",
+        form: false
+      });
+
+      dir(DST, "app/views/mytest").must.exist();
+      file(DST, "app/views/mytest/Test.hbs").must.exist();
+    });
+
+    suite("Form?", function() {
+      test("generate(answers) - generate form", function() {
+        gen.generate({
+          folder: "/",
+          view: "Test",
+          form: true
+        });
+
+        file(DST, "app/views/Test.hbs").must.exist();
+        file(DST, "app/views/Test.hbs").must.contain("<form");
+      });
+
+      test("generate(answers) - not generate form", function() {
+        gen.generate({
+          folder: "/",
+          view: "Test",
+          form: false
+        });
+
+        file(DST, "app/views/Test.hbs").must.exist();
+        file(DST, "app/views/Test.hbs").must.not.contain("<form");
+      });
+    });
   });
 })();

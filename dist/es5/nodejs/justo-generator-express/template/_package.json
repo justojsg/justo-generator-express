@@ -29,7 +29,6 @@
     "npm": ">= 3.0.0"
   },
   "dependencies": {
-    "express": "*",
     {{#if (gt (length scope.bodyParser) 0)}}
     "body-parser": "*",
     {{/if}}
@@ -41,6 +40,9 @@
     {{/if}}
     {{#if (eq scope.session "express-session")}}
     "express-session": "*",
+    {{/if}}
+    {{#if scope.hbs}}
+    "hbs": "*",
     {{/if}}
     {{#if scope.helmet}}
     "helmet": "*",
@@ -54,7 +56,7 @@
     {{#if scope.serveStatic}}
     "serve-static": "*",
     {{/if}}
-    "hbs": "*"
+    "express": "*"
   },
   "devDependencies": {
     "babel-preset-es2015": "*",
@@ -68,11 +70,10 @@
     {{#if (eq scope.linter "ESLint")}}
     "justo-plugin-eslint": "*",
     {{/if}}
-    "justo-plugin-fs": "*",
     {{#if (eq scope.linter "JSHint")}}
     "justo-plugin-jshint": "*",
     {{/if}}
-    "justo-plugin-npm": "*"
+    "justo-plugin-fs": "*"
   },
   "bin": {
     "{{scope.binName}}": "./bin/www.js"
@@ -88,7 +89,7 @@
   "scripts": {
     "start": "node ./bin/www.js",
     {{#if scope.nodemon}}
-    "start-dev": "./node_modules/.bin/nodemon --delay 2s --ext hbs,js,json ./bin/www.js",
+    "start-dev": "./node_modules/.bin/nodemon --delay 2s {{#if scope.hbs}}--ext hbs,js,json{{/if}} ./bin/www.js",
     {{/if}}
     "test": "justo test"
   }

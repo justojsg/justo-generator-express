@@ -1,5 +1,4 @@
 //imports
-const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
 const dir = require("justo-assert-fs").dir;
@@ -31,8 +30,27 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    // test("generate(answers)", function() {
-    //   gen.generate({});
-    // });
+    suite("Folder", function() {
+      test("folder is /", function() {
+        gen.generate({
+          folder: "/",
+          name: "test"
+        });
+
+        file(DST, "app/views/partials/test.hbs").must.exist();
+        file(DST, "app/views/partials/test.hbs").must.contain("{{!-- partial content --}}");
+      });
+
+      test("folder is other", function() {
+        gen.generate({
+          folder: "other",
+          name: "test"
+        });
+
+        dir(DST, "app/views/partials/other").must.exist();
+        file(DST, "app/views/partials/other/test.hbs").must.exist();
+        file(DST, "app/views/partials/other/test.hbs").must.contain("{{!-- partial content --}}");
+      });
+    });
   });
 })();

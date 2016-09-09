@@ -1,5 +1,5 @@
 //imports
-const path = require("path");
+const fs = require("justo-fs");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
 const dir = require("justo-assert-fs").dir;
@@ -11,6 +11,8 @@ const Generator = require("../../../dist/es5/nodejs/justo-generator-express")["r
 
 //suite
 suite("Generator", function() {
+  const SRC = "test/unit/data";
+
   suite("#constructor()", function() {
     test("constructor()", function() {
       var gen = new Generator({});
@@ -31,8 +33,33 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    // test("generate(answers)", function() {
-    //   gen.generate({});
-    // });
+    suite("folder", function() {
+      init("*", function() {
+        fs.copy(SRC, DST);
+      }).title("Prepare environment");
+
+      test("generate(answers) - folder is /", function() {
+        gen.generate({
+          folder: "/",
+          name: "test",
+          indexView: "my/View"
+        });
+
+        file(DST, "app/routes/test.js").must.exist();
+        file(DST, "app/routes/map.js").must.contain("app.use(\"/test\", require(\"./test\").router);");
+      });
+
+      test("generate(answers) - folder is other", function() {
+        gen.generate({
+          folder: "other",
+          name: "test",
+          indexView: "my/View"
+        });
+
+        dir(DST, "app/routes/other").must.exist();
+        file(DST, "app/routes/other/test.js").must.exist();
+        file(DST, "app/routes/map.js").must.contain("app.use(\"/other/test\", require(\"./other/test\").router);");
+      });
+    });
   });
 })();
